@@ -21,6 +21,14 @@ document.querySelectorAll(".item[data-key]").forEach(el=>{
 	})
 })
 
+const notesOpen = document.getElementById("notesOpen");
+const notesList = document.getElementById("notesList");
+if(notesOpen && notesList){
+	notesOpen.addEventListener("click", ()=>{
+		notesList.classList.toggle("open");
+	});
+}
+
 const menuBtn = document.getElementById("menuBtn");
 const drop = document.getElementById("drop");
 menuBtn.addEventListener("click", ()=>{
@@ -30,6 +38,7 @@ document.addEventListener("click", (e)=>{
 	if(!menuBtn.contains(e.target) && !drop.contains(e.target)){
 		drop.classList.remove("show");
 		modelList.classList.remove("open");
+		if(notesList) notesList.classList.remove("open");
 	}
 })
 
