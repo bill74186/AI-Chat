@@ -3,10 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<title>AI 聊天</title>
+	<title>AI Chat | bill74186 - 免费在线智能对话，支持Spark、GLM、Quark多模型聊天</title>
+	<meta name="description" content="AI Chat由bill74186开发，免费在线智能对话工具，支持自定义AI人设，切换Spark、GLM、Quark大模型，实时Markdown渲染对话，支持夜间深色模式，手机电脑均可流畅使用。">
+	<meta name="keywords" content="AI聊天,在线智能对话,Spark大模型,GLM对话,Quark大模型,自定义AI人设,免费AI聊天,AI Chat bill74186">
+	<meta name="robots" content="index,follow">
+	<meta name="author" content="bill74186">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<link rel="alternate" hreflang="en" href="index.html">
+	<link rel="alternate" hreflang="zh-CN" href="zh.html">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="AI Chat | bill74186 - 免费在线智能多模型对话工具">
+	<meta property="og:description" content="免费在线AI对话平台，自定义人设、切换Spark/GLM/Quark三大模型，实时对话、支持Markdown、深色夜间模式，全设备适配。">
+	<meta property="og:locale" content="zh_CN">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="style.css">
-	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
 </head>
 <body data-think="正在思考..." data-error="出现错误，请稍后重试。">
 	<header>
@@ -14,7 +29,7 @@
 			<i class="fa-solid fa-bars"></i>
 		</button>
 		<div class="logo">AI Chat</div>
-		<a href="https://github.com/bill74186/AI-Chat" target="_blank" class="git-link">
+		<a href="https://github.com/bill74186/AI-Chat" target="_blank" rel="noopener noreferrer" class="git-link">
 			<i class="fa-brands fa-github"></i>
 		</a>
 	</header>
@@ -43,19 +58,19 @@
 			</a>
 		</div>
 		<div class="item">
-			<a href="https://bill74186.github.io/about" target="_blank">
+			<a href="https://bill74186.github.io/about" target="_blank" rel="noopener noreferrer">
 				<i class="fa-solid fa-user"></i>
-				<span>关于</span>
+				<span>关于作者</span>
 			</a>
 		</div>
 	</nav>
-	<main id="chat"></main>
-	<footer>
-		<input type="text" id="input" placeholder="输入你的消息..."/>
-		<button class="send" id="send">
+	<main id="chat" aria-label="AI对话聊天内容区"></main>
+	<footer aria-label="消息输入发送区域">
+		<input type="text" id="input" placeholder="输入你的消息，即可开启AI对话..." aria-label="输入聊天消息">
+		<button class="send" id="send" aria-label="发送消息">
 			<i class="fa-solid fa-arrow-up"></i>
 		</button>
 	</footer>
-	<script src="script.js"></script>
+	<script src="script.js" defer></script>
 </body>
 </html>
