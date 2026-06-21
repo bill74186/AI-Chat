@@ -8,24 +8,24 @@ function setActive(){
 setActive();
 
 const modelOpen = document.getElementById("modelOpen");
-const modelList = document.getElementById("modelList");
+const list1 = document.getElementById("List1");
 modelOpen.addEventListener("click", ()=>{
-	modelList.classList.toggle("open");
+	list1.classList.toggle("open");
 });
 document.querySelectorAll(".item[data-key]").forEach(el=>{
 	el.addEventListener("click", ()=>{
 		currentKey = el.dataset.key;
 		localStorage.setItem("modelKey", currentKey);
 		setActive();
-		modelList.classList.remove("open");
+		list1.classList.remove("open");
 	})
 })
 
 const notesOpen = document.getElementById("notesOpen");
-const notesList = document.getElementById("notesList");
-if(notesOpen && notesList){
+const list2 = document.getElementById("List2");
+if(notesOpen && list2){
 	notesOpen.addEventListener("click", ()=>{
-		notesList.classList.toggle("open");
+		list2.classList.toggle("open");
 	});
 }
 
@@ -37,8 +37,8 @@ menuBtn.addEventListener("click", ()=>{
 document.addEventListener("click", (e)=>{
 	if(!menuBtn.contains(e.target) && !drop.contains(e.target)){
 		drop.classList.remove("show");
-		modelList.classList.remove("open");
-		if(notesList) notesList.classList.remove("open");
+		list1.classList.remove("open");
+		if(list2) list2.classList.remove("open");
 	}
 })
 
