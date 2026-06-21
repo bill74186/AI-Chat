@@ -54,10 +54,11 @@
 			justify-content: center;
 			z-index: 10;
 		}
-		.top-bar .logo {
+		.top-bar a {
 			font-size: 20px;
 			font-weight: 700;
 			color: #1677ff;
+			text-decoration: none;
 		}
 		#chat {
 			padding: 16px;
@@ -201,7 +202,7 @@
 </head>
 <body>
 <div class="top-bar">
-	<div class="logo">AI Chat</div>
+	<a href="/">AI Chat</a>
 </div>
 <div id="chat"></div>
 <div class="input-bar">
@@ -219,7 +220,7 @@
 		thinkingMessage.innerText = '正在思考...';
 		chatDiv.appendChild(thinkingMessage);
 		window.scrollTo(0, document.body.scrollHeight);
-		fetch(`https://api.52vmy.cn/api/chat/spark?msg=${encodeURIComponent(userInput)}`)
+		fetch(`https://api.52vmy.cn/api/chat/glm?msg=${encodeURIComponent(userInput)}`)
 			.then(response => response.json())
 			.then(data => {
 				const aiFullMarkdown = data.data && data.data.answer ? data.data.answer : "抱歉，由于限制，请稍后再试";
