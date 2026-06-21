@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<title>AI Chat</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body data-think="Thinking..." data-error="An error occurred, please try again later.">
+	<header>
+		<button class="menu" id="menuBtn">
+			<i class="fa-solid fa-bars"></i>
+		</button>
+		<div class="logo">AI Chat</div>
+		<a href="https://github.com/bill74186/AI-Chat" target="_blank" class="git-link">
+			<i class="fa-brands fa-github"></i>
+		</a>
+	</header>
+	<nav class="drop" id="drop">
+		<div class="item" id="darkToggle">
+			<i class="fa-solid fa-moon"></i>
+			<span>Dark Mode</span>
+		</div>
+		<div class="item" id="modelOpen">
+			<i class="fa-solid fa-brain"></i>
+			<span>Select AI Model</span>
+		</div>
+		<div class="sub" id="modelList">
+			<div class="item active" data-key="spark">Spark</div>
+			<div class="item" data-key="glm">GLM</div>
+			<div class="item" data-key="quark">Quark</div>
+		</div>
+		<div class="item" id="setRoleBtn">
+			<i class="fa-solid fa-user-gear"></i>
+			<span>Custom AI Role</span>
+		</div>
+		<div class="item">
+			<a href="zh.html">
+				<i class="fa-solid fa-language"></i>
+				<span>简体中文</span>
+			</a>
+		</div>
+		<div class="item">
+			<a href="https://bill74186.github.io/about" target="_blank">
+				<i class="fa-solid fa-user"></i>
+				<span>About</span>
+			</a>
+		</div>
+	</nav>
+	<main id="chat"></main>
+	<footer>
+		<input type="text" id="input" placeholder="Type your message..."/>
+		<button class="send" id="send">
+			<i class="fa-solid fa-arrow-up"></i>
+		</button>
+	</footer>
+	<script src="script.js"></script>
+</body>
+</html>

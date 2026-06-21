@@ -1,0 +1,112 @@
+let currentKey = localStorage.getItem("modelKey") || "spark";
+
+function setActive(){
+	document.querySelectorAll(".item[data-key]").forEach(el=>{
+		el.classList.toggle("active", el.dataset.key === currentKey);
+	})
+}
+setActive();
+
+const modelOpen = document.getElementById("modelOpen");
+const modelList = document.getElementById("modelList");
+modelOpen.addEventListener("click", ()=>{
+	modelList.classList.toggle("open");
+});
+document.querySelectorAll(".item[data-key]").forEach(el=>{
+	el.addEventListener("click", ()=>{
+		currentKey = el.dataset.key;
+		localStorage.setItem("modelKey", currentKey);
+		setActive();
+		modelList.classList.remove("open");
+	})
+})
+
+const menuBtn = document.getElementById("menuBtn");
+const drop = document.getElementById("drop");
+menuBtn.addEventListener("click", ()=>{
+	drop.classList.toggle("show");
+});
+document.addEventListener("click", (e)=>{
+	if(!menuBtn.contains(e.target) && !drop.contains(e.target)){
+		drop.classList.remove("show");
+		modelList.classList.remove("open");
+	}
+})
+
+const darkToggle = document.getElementById("darkToggle");
+const body = document.body;
+if(localStorage.getItem("darkMode") === "on"){
+	body.classList.add("dark");
+}
+darkToggle.addEventListener("click", ()=>{
+	body.classList.toggle("dark");
+	const isDark = body.classList.contains("dark");
+	localStorage.setItem("darkMode", isDark ? "on" : "off");
+})
+
+const setRoleBtn = document.getElementById("setRoleBtn");
+setRoleBtn.addEventListener("click", ()=>{
+	const oldRole = localStorage.getItem("customSystemRole") || "";
+	const newRole = prompt("输入自定义AI全局人设（清空保存即可恢复自由对话）：", oldRole);
+	if(newRole !== null){
+		const trimRole = newRole.trim();
+		if(trimRole === ""){
+			localStorage.removeItem("customSystemRole");
+			alert("已清空全局人设，恢复自由全能对话");
+		}else{
+			localStorage.setItem("customSystemRole", trimRole);
+			alert("自定义人设已保存，后续对话自动生效");
+		}
+		drop.classList.remove("show");
+	}
+})
+
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
+const send = document.getElementById("send");
+
+function sendMsg(){
+	const text = input.value.trim();
+	if(!text) return;
+	chat.innerHTML += `<div class="msg user">${text}</div>`;
+	input.value = "";
+	const thinkText = document.body.dataset.think || "Thinking...";
+	const errorText = document.body.dataset.error || "An error occurred, please try again later.";
+	const think = document.createElement("div");
+	think.className = "msg think";
+	think.textContent = thinkText;
+	chat.appendChild(think);
+	window.scrollTo(0, document.body.scrollHeight);
+	const systemRole = localStorage.getItem("customSystemRole") || "";
+	const prompt = systemRole ? `${systemRole} 以下是我的问题：${text}` : text;
+	fetch(`https://api.52vmy.cn/api/chat/${currentKey}?msg=${encodeURIComponent(prompt)}`)
+		.then(res=>res.json())
+		.then(data=>{
+			const reply = data.data?.answer || errorText;
+			think.remove();
+			const aiBox = document.createElement("div");
+			aiBox.className = "msg ai";
+			chat.appendChild(aiBox);
+			let full = "", idx = 0;
+			const type = setInterval(()=>{
+				if(idx < reply.length){
+					full += reply[idx];
+					aiBox.innerHTML = marked.parse(full);
+					window.scrollTo(0, document.body.scrollHeight);
+					idx++;
+				}else clearInterval(type);
+			},10)
+		})
+		.catch(()=>{
+			think.remove();
+			chat.innerHTML += `<div class="msg ai">${errorText}</div>`;
+			window.scrollTo(0, document.body.scrollHeight);
+		})
+}
+send.addEventListener("click", sendMsg);
+input.addEventListener("keydown", e=>{
+	if(e.key === "Enter" && !e.shiftKey){
+		e.preventDefault();
+		sendMsg();
+	}
+})
