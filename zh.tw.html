@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<title>AI Chat | bill74186 - 免費線上智慧對話，支援Spark、GLM、Quark多模型聊天</title>
+	<meta name="description" content="AI Chat由bill74186開發，免費線上智慧對話工具，可自訂AI人設、切換Spark、GLM、Quark大型語言模型，對話即時渲染Markdown，支援深色夜間模式，手機電腦皆可順暢使用。">
+	<meta name="keywords" content="AI聊天,線上智慧對話,Spark大型模型,GLM對話,Quark大型模型,自訂AI人設,免費AI聊天,AI Chat bill74186">
+	<meta name="robots" content="index,follow">
+	<meta name="author" content="bill74186">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<link rel="alternate" hreflang="en" href="index.html">
+	<link rel="alternate" hreflang="zh-CN" href="zh.cn.html">
+	<link rel="alternate" hreflang="zh-TW" href="zh.tw.html">
+	<link rel="icon" href=" /favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="AI Chat | bill74186 - 免費線上AI多模型對話工具">
+	<meta property="og:description" content="免費線上AI對話平台，自訂人設、切換Spark/GLM/Quark三大模型，即時對話、支援Markdown、深色夜間模式，全裝置相容。">
+	<meta property="og:locale" content="zh_TW">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+</head>
+<body
+	data-think="正在思考中..."
+	data-error="發生錯誤，請稍後再試。"
+	data-role-prompt="輸入自訂AI全域人設（清空並儲存即可恢復自由對話）："
+	data-role-cleared="已清空全域人設，恢復自由萬能對話"
+	data-role-saved="自訂人設已儲存，後續對話自動套用">
+	<header>
+		<button class="menu" id="menuBtn">
+			<i class="fa-solid fa-bars"></i>
+		</button>
+		<div class="logo">AI Chat</div>
+		<a href="https://github.com/bill74186/AI-Chat" target="_blank" rel="noopener noreferrer" class="git-link">
+			<i class="fa-brands fa-github"></i>
+		</a>
+	</header>
+	<nav id="drop">
+		<div class="item" id="darkToggle">
+			<i class="fa-solid fa-moon"></i>
+			<span>夜間模式</span>
+		</div>
+		<div class="item" id="langOpen">
+			<i class="fa-solid fa-language"></i>
+			<span>語言選擇</span>
+		</div>
+		<div class="sub" id="List1">
+			<a href="index.html" class="item">English</a>
+			<a href="zh.cn.html" class="item">简体中文</a>
+			<div class="item active">繁體中文</div>
+		</div>
+		<div class="item" id="modelOpen">
+			<i class="fa-solid fa-brain"></i>
+			<span>模型選擇</span>
+		</div>
+		<div class="sub" id="List2">
+			<div class="item active" data-key="spark">Spark</div>
+			<div class="item" data-key="glm">GLM</div>
+			<div class="item" data-key="quark">Quark</div>
+		</div>
+		<div class="item" id="setRoleBtn">
+			<i class="fa-solid fa-user-gear"></i>
+			<span>人設設定</span>
+		</div>
+		<div class="item">
+			<a href="https://bill74186.github.io/about" target="_blank" rel="noopener noreferrer">
+				<i class="fa-solid fa-user"></i>
+				<span>關於作者</span>
+			</a>
+		</div>
+		<div class="item" id="notesOpen">
+			<i class="fa-solid fa-circle-info"></i>
+			<span>使用須知</span>
+		</div>
+		<div class="sub" id="List3">
+			<div class="item active">AI產生內容僅供參考，請自行辨識判斷。</div>
+			<div class="item">請勿輸入機密個人資訊或隱私資料。</div>
+			<div class="item">各模型功能特性不同，依使用場景切換。</div>
+		</div>
+	</nav>
+	<main id="chat" aria-label="AI對話聊天內容區塊"></main>
+	<footer aria-label="訊息輸入與傳送區域">
+		<input type="text" id="input" placeholder="輸入你的問題..." aria-label="輸入聊天訊息">
+		<button class="send" id="send" aria-label="傳送訊息">
+			<i class="fa-solid fa-arrow-up"></i>
+		</button>
+	</footer>
+	<script src="script.js" defer></script>
+</body>
+</html>
