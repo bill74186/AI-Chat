@@ -47,15 +47,18 @@ darkToggle.addEventListener("click", ()=>{
 const setRoleBtn = document.getElementById("setRoleBtn");
 setRoleBtn.addEventListener("click", ()=>{
 	const oldRole = localStorage.getItem("customSystemRole") || "";
-	const newRole = prompt("Enter a custom global AI persona (clear and save to restore free conversation):", oldRole);
+	const rolePrompt = document.body.dataset.rolePrompt || "Enter a custom global AI persona (clear and save to restore free conversation):";
+	const roleCleared = document.body.dataset.roleCleared || "Global persona cleared. Restored free, unrestricted conversation.";
+	const roleSaved = document.body.dataset.roleSaved || "Custom persona saved. It will apply automatically to future conversations.";
+	const newRole = prompt(rolePrompt, oldRole);
 	if(newRole !== null){
 		const trimRole = newRole.trim();
 		if(trimRole === ""){
 			localStorage.removeItem("customSystemRole");
-			alert("Global persona cleared. Restored free, unrestricted conversation.");
+			alert(roleCleared);
 		}else{
 			localStorage.setItem("customSystemRole", trimRole);
-			alert("Custom persona saved. It will apply automatically to future conversations.");
+			alert(roleSaved);
 		}
 		drop.classList.remove("show");
 	}
