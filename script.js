@@ -47,15 +47,15 @@ darkToggle.addEventListener("click", ()=>{
 const setRoleBtn = document.getElementById("setRoleBtn");
 setRoleBtn.addEventListener("click", ()=>{
 	const oldRole = localStorage.getItem("customSystemRole") || "";
-	const newRole = prompt("输入自定义AI全局人设（清空保存即可恢复自由对话）：", oldRole);
+	const newRole = prompt("Enter a custom global AI persona (clear and save to restore free conversation):", oldRole);
 	if(newRole !== null){
 		const trimRole = newRole.trim();
 		if(trimRole === ""){
 			localStorage.removeItem("customSystemRole");
-			alert("已清空全局人设，恢复自由全能对话");
+			alert("Global persona cleared. Restored free, unrestricted conversation.");
 		}else{
 			localStorage.setItem("customSystemRole", trimRole);
-			alert("自定义人设已保存，后续对话自动生效");
+			alert("Custom persona saved. It will apply automatically to future conversations.");
 		}
 		drop.classList.remove("show");
 	}
