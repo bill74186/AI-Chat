@@ -7,11 +7,17 @@ import java.net.URLEncoder;
 public class ai {
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println("用法：java ai 你的问题");
+            System.out.println("[*]Usage：java ai [question]");
+            System.out.println("[*]用法：java ai [你的问题]");
             return;
         }
         try {
-            String msg = args[0];
+            StringBuilder msgRaw = new StringBuilder();
+            for (String s : args) {
+                msgRaw.append(s).append(" ");
+            }
+            String msg = msgRaw.toString().trim();
+            
             String msgEncode = URLEncoder.encode(msg, "UTF-8");
             String apiUrl = "https://api.52vmy.cn/api/chat/glm?msg=" + msgEncode + "&type=text";
 
@@ -28,9 +34,9 @@ public class ai {
             br.close();
             conn.disconnect();
 
-            System.out.println(sb);
+            System.out.println("\n===== AI Chat =====\n" + sb + "\n");
         } catch (Exception e) {
-            System.out.println("请求出错：" + e.getMessage());
+            System.out.println("[!]请求出错：" + e.getMessage());
         }
     }
 }

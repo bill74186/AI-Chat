@@ -8,14 +8,15 @@ struct Memory {
     size_t length;
 };
 
-size_t write_callback(void *data, size_t size, size_t nmemb, struct Memory *mem) {
+size_t write_callback(void *data, size_t size, size_t nmemb, void *mem) {
+    struct Memory *m = (struct Memory *)mem;
     size_t total = size * nmemb;
-    char *new_buf = realloc(mem->buffer, mem->length + total + 1);
+    char *new_buf = realloc(m->buffer, m->length + total + 1);
     if (!new_buf) return 0;
-    mem->buffer = new_buf;
-    memcpy(mem->buffer + mem->length, data, total);
-    mem->length += total;
-    mem->buffer[mem->length] = '\0';
+    m->buffer = new_buf;
+    memcpy(m->buffer + m->length, data, total);
+    m->length += total;
+    m->buffer[m->length] = '\0';
     return total;
 }
 
@@ -39,7 +40,8 @@ char* url_encode(const char *str) {
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        printf("用法：./ai 你的问题\n");
+        printf("[*]Usage：./ai [question]\n");
+        printf("[*]用法：./ai [你的问题]\n");
         return 1;
     }
 
@@ -47,7 +49,14 @@ int main(int argc, char *argv[]) {
     CURLcode ret;
     struct Memory res_data = {NULL, 0};
 
-    char *msg_encode = url_encode(argv[1]);
+    char full_msg[512] = {0};
+    for (int i = 1; i < argc; i++) {
+        strcat(full_msg, argv[i]);
+        strcat(full_msg, " ");
+    }
+    full_msg[strlen(full_msg) - 1] = '\0';
+
+    char *msg_encode = url_encode(full_msg);
     char api_url[1024];
     snprintf(api_url, sizeof(api_url),
              "https://api.52vmy.cn/api/chat/glm?msg=%s&type=text",
@@ -57,7 +66,7 @@ int main(int argc, char *argv[]) {
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
     if (!curl) {
-        printf("curl初始化失败\n");
+        printf("[!]curl初始化失败\n");
         return 1;
     }
 
@@ -68,9 +77,9 @@ int main(int argc, char *argv[]) {
 
     ret = curl_easy_perform(curl);
     if (ret != CURLE_OK) {
-        printf("请求出错：%s\n", curl_easy_strerror(ret));
+        printf("[!]请求出错：%s\n", curl_easy_strerror(ret));
     } else {
-        printf("%s\n", res_data.buffer);
+        printf("\n===== AI Chat =====\n%s\n\n", res_data.buffer);
     }
 
     curl_easy_cleanup(curl);
