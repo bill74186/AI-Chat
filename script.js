@@ -44,13 +44,27 @@ document.addEventListener("click", (e)=>{
 
 const darkToggle = document.getElementById("darkToggle");
 const body = document.body;
+const darkText = document.body.dataset.darkText || "Dark Mode";
+const lightText = document.body.dataset.lightText || "Light Mode";
+
 if(localStorage.getItem("darkMode") === "on"){
 	body.classList.add("dark");
+	darkToggle.querySelector("span").textContent = lightText;
+	darkToggle.querySelector("i").className = "fa-solid fa-sun";
 }
+
 darkToggle.addEventListener("click", ()=>{
 	body.classList.toggle("dark");
 	const isDark = body.classList.contains("dark");
 	localStorage.setItem("darkMode", isDark ? "on" : "off");
+	
+	if(isDark){
+		darkToggle.querySelector("span").textContent = lightText;
+		darkToggle.querySelector("i").className = "fa-solid fa-sun";
+	} else {
+		darkToggle.querySelector("span").textContent = darkText;
+		darkToggle.querySelector("i").className = "fa-solid fa-moon";
+	}
 })
 
 const setRoleBtn = document.getElementById("setRoleBtn");
