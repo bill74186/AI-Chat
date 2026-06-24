@@ -28,6 +28,7 @@
 <body
 	data-think="Thinking..."
 	data-error="An error occurred, please try again later."
+	data-tip="AI-generated content is for reference only."
 	data-role-prompt="Enter a custom global AI persona (clear and save to restore free conversation):"
 	data-role-cleared="Global persona cleared. Restored free, unrestricted conversation."
 	data-role-saved="Custom persona saved. It will apply automatically to future conversations.">
@@ -59,9 +60,10 @@
 			<span>Select Model</span>
 		</div>
 		<div class="sub" id="List2">
-			<div class="item active" data-key="spark">Spark</div>
-			<div class="item" data-key="glm">GLM</div>
+			<div class="item active" data-key="glm">GLM</div>
+			<div class="item" data-key="spark">Spark</div>
 			<div class="item" data-key="quark">Quark</div>
+			<a class="item" href="web/draw.html">Draw</a>
 		</div>
 		<div class="item" id="setRoleBtn">
 			<i class="fa-solid fa-user-gear"></i>

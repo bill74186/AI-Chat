@@ -1,4 +1,4 @@
-let currentKey = localStorage.getItem("modelKey") || "spark";
+let currentKey = localStorage.getItem("modelKey") || "glm";
 
 function setActive(){
 	document.querySelectorAll(".item[data-key]").forEach(el=>{
@@ -8,7 +8,7 @@ function setActive(){
 setActive();
 
 const list1 = document.getElementById("List1");
-if(notesOpen && list1){
+if(langOpen && list1){
 	langOpen.addEventListener("click", ()=>{
 		list1.classList.toggle("open");
 	});
@@ -89,6 +89,8 @@ function sendMsg(){
 	input.value = "";
 	const thinkText = document.body.dataset.think || "Thinking...";
 	const errorText = document.body.dataset.error || "An error occurred, please try again later.";
+	const aiTipText = document.body.dataset.tip || "AI-generated content is for reference only.";
+
 	const think = document.createElement("div");
 	think.className = "msg think";
 	think.textContent = thinkText;
@@ -103,12 +105,13 @@ function sendMsg(){
 			think.remove();
 			const aiBox = document.createElement("div");
 			aiBox.className = "msg ai";
+			aiBox.innerHTML = `<div class="tip">${aiTipText}</div>`;
 			chat.appendChild(aiBox);
 			let full = "", idx = 0;
 			const type = setInterval(()=>{
 				if(idx < reply.length){
 					full += reply[idx];
-					aiBox.innerHTML = marked.parse(full);
+					aiBox.innerHTML = `<div class="tip">${aiTipText}</div>` + marked.parse(full);
 					window.scrollTo(0, document.body.scrollHeight);
 					idx++;
 				}else clearInterval(type);
@@ -116,7 +119,10 @@ function sendMsg(){
 		})
 		.catch(()=>{
 			think.remove();
-			chat.innerHTML += `<div class="msg ai">${errorText}</div>`;
+			chat.innerHTML += `<div class="msg ai">
+				<div class="tip">${aiTipText}</div>
+				${errorText}
+			</div>`;
 			window.scrollTo(0, document.body.scrollHeight);
 		})
 }

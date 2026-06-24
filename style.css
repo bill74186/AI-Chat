@@ -116,6 +116,7 @@ body.dark .git-link {
 	color: #1568c8;
 }
 .logo {
+	text-decoration: none;
 	font-size: 20px;
 	font-weight: 700;
 	color: #1677ff;
@@ -154,6 +155,7 @@ body.dark .item {
 }
 .item:hover {
 	background: #f0f2f5;
+	color: #1677ff;
 }
 body.dark .item:hover {
 	background: #2a2a2a;
@@ -246,6 +248,11 @@ main {
 body.dark .think {
 	color: #aaa;
 }
+.tip {
+	font-size: 13px;
+	color: #888;
+	margin-top: 6px;
+}
 .ai h1,
 .ai h2,
 .ai h3 {
@@ -327,7 +334,7 @@ footer input:focus {
 	border-color: #1677ff;
 	background: #ffffff;
 }
-.send {
+#send {
 	flex-shrink: 0;
 	width: 44px;
 	height: 44px;
@@ -341,12 +348,12 @@ footer input:focus {
 	align-items: center;
 	justify-content: center;
 }
-.send i {
+#send i {
 	font-size: 18px;
 }
-.send:hover {
+#send:hover {
 	background: #1568c8;
 }
-.send:active {
+#send:active {
 	background: #1258a8;
 }

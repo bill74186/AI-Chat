@@ -27,6 +27,7 @@
 <body
 	data-think="正在思考中..."
 	data-error="發生錯誤，請稍後再試。"
+	data-tip="AI產生內容僅供參考。"
 	data-role-prompt="輸入自訂AI全域人設（清空並儲存即可恢復自由對話）："
 	data-role-cleared="已清空全域人設，恢復自由萬能對話"
 	data-role-saved="自訂人設已儲存，後續對話自動套用">
@@ -58,9 +59,10 @@
 			<span>模型選擇</span>
 		</div>
 		<div class="sub" id="List2">
-			<div class="item active" data-key="spark">Spark</div>
-			<div class="item" data-key="glm">GLM</div>
+			<div class="item active" data-key="glm">GLM</div>
+			<div class="item" data-key="spark">Spark</div>
 			<div class="item" data-key="quark">Quark</div>
+			<a class="item" href="web/draw.html">Draw</a>
 		</div>
 		<div class="item" id="setRoleBtn">
 			<i class="fa-solid fa-user-gear"></i>
@@ -85,7 +87,7 @@
 	<main id="chat" aria-label="AI對話聊天內容區塊"></main>
 	<footer aria-label="訊息輸入與傳送區域">
 		<input type="text" id="input" placeholder="輸入你的問題..." aria-label="輸入聊天訊息">
-		<button class="send" id="send" aria-label="傳送訊息">
+		<button id="send" aria-label="傳送訊息">
 			<i class="fa-solid fa-arrow-up"></i>
 		</button>
 	</footer>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<title>AI Draw | bill74186</title>
+	<link rel="icon" href="../favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="../style.css">
+	<style>
+		img {
+			width: 100%;
+			max-width: 512px;
+			border-radius: 12px;
+			margin-top: 8px;
+			cursor: pointer;
+			transition: opacity 0.3s;
+		}
+		img:hover {
+			opacity: 0.9;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<a class="logo" href="../">AI Draw</a>
+</header>
+<main id="chat"></main>
+<footer>
+	<input type="text" id="input" placeholder="Enter your drawing prompt, e.g. anime girl, starry background..." />
+	<button id="send">↑</button>
+</footer>
+<script>
+	const darkToggle = document.getElementById("darkToggle");
+	const body = document.body;
+	if(localStorage.getItem("darkMode") === "on"){
+		body.classList.add("dark");
+	}
+
+	const sendBtn = document.getElementById("send");
+	const input = document.getElementById("input");
+	const chatBox = document.getElementById("chat");
+
+	function generateImage() {
+		const prompt = input.value.trim();
+		if (!prompt) return;
+
+		chatBox.innerHTML += `<div class="msg user">${prompt}</div>`;
+		input.value = "";
+
+		const loadingDom = document.createElement("div");
+		loadingDom.className = "think";
+		loadingDom.innerText = "Drawing...";
+		chatBox.appendChild(loadingDom);
+		window.scrollTo(0, document.body.scrollHeight);
+
+		const seed = Math.floor(Math.random() * 100) + 1;
+		const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${seed}`;
+
+		const img = new Image();
+		img.onload = () => {
+			chatBox.removeChild(loadingDom);
+			const aiBox = document.createElement("div");
+			aiBox.className = "msg ai";
+			aiBox.innerHTML = `
+				<div class="tip">AI-generated content is for reference only.</div>
+				<div>Prompt: <b>${prompt}</b> | Seed: ${seed}</div>
+				<img src="${imgUrl}" alt="AI Generated Art" onclick="window.open('${imgUrl}', '_blank')">
+				<div class="tip">Click the image to open original in new tab</div>
+			`;
+			chatBox.appendChild(aiBox);
+			window.scrollTo(0, document.body.scrollHeight);
+		};
+		img.onerror = () => {
+			chatBox.removeChild(loadingDom);
+			chatBox.innerHTML += `<div class="msg ai">Image generation failed, please change your prompt and try again</div>`;
+			window.scrollTo(0, document.body.scrollHeight);
+		};
+		img.src = imgUrl;
+	}
+
+	sendBtn.onclick = generateImage;
+	input.addEventListener("keydown", e => {
+		if (e.key === "Enter") generateImage();
+	});
+</script>
+</body>
+</html>

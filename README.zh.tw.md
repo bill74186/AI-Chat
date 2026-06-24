@@ -43,13 +43,14 @@ AI Chat 是由 **bill74186** 開發的免費線上 AI 對話工具，支援 Spar
 | English | https://bill74186.github.io/AI-Chat/index.html |
 | 简体中文 | https://bill74186.github.io/AI-Chat/zh.cn.html |
 | 繁體中文 | https://bill74186.github.io/AI-Chat/zh.tw.html |
-| 特簡化版 | https://bill74186.github.io/AI-Chat/ai/ai.html |
-
+| 特簡化版 | https://bill74186.github.io/AI-Chat/web/chat.html |
+| 繪畫工具 | https://bill74186.github.io/AI-Chat/web/draw.html |
 ## 支援的模型
 
-- **Spark**: 訊飛星火大模型
 - **GLM**: 智譜 AI 大模型
+- **Spark**: 訊飛星火大模型
 - **Quark**: 夸克大模型
+- **Draw**: AI 繪畫大模型
 - **More**: 還有更多等待添加
 
 ## 技術棧

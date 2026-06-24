@@ -43,13 +43,15 @@ AI Chat is a **free online AI chat tool** developed by **bill74186**. It support
 | English | https://bill74186.github.io/AI-Chat/index.html |
 | 简体中文 | https://bill74186.github.io/AI-Chat/zh.cn.html |
 | 繁體中文 | https://bill74186.github.io/AI-Chat/zh.tw.html |
-| Simple Version | https://bill74186.github.io/AI-Chat/ai/ai.html |
+| Simple Version | https://bill74186.github.io/AI-Chat/web/chat.html |
+| Painting Version | https://bill74186.github.io/AI-Chat/web/draw.html |
 
 ## Supported Models
 
-- **Spark**: iFlytek Spark LLM
 - **GLM**: Zhipu AI LLM
+- **Spark**: iFlytek Spark LLM
 - **Quark**: Quark LLM
+- **Draw**:  AI painting LLM
 - **More**: More models coming soon!
 
 ## Tech Stack

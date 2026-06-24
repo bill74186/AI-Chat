@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<title>AI Chat | bill74186</title>
+	<link rel="icon" href="../favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="../style.css">
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<header>
+	<a class="logo" href="../">AI Chat</a>
+</header>
+<main id="chat"></main>
+<footer>
+	<input type="text" id="input" placeholder="Type your message..." />
+	<button id="send">↑</button>
+</footer>
+<script>
+	const darkToggle = document.getElementById("darkToggle");
+	const body = document.body;
+	if(localStorage.getItem("darkMode") === "on"){
+		body.classList.add("dark");
+	}
+	document.getElementById("send").onclick = function() {
+		const input = document.getElementById("input").value;
+		if (input.trim() === "") return;
+		const chatDiv = document.getElementById("chat");
+		chatDiv.innerHTML += `<div class="msg user">${input}</div>`;
+		document.getElementById("input").value = "";
+		const thinkingMessage = document.createElement('div');
+		thinkingMessage.className = 'msg think';
+		thinkingMessage.innerText = 'Thinking...';
+		chatDiv.appendChild(thinkingMessage);
+		window.scrollTo(0, document.body.scrollHeight);
+		fetch(`https://api.52vmy.cn/api/chat/glm?msg=${encodeURIComponent(input)}`)
+			.then(response => response.json())
+			.then(data => {
+				const aiFullMarkdown = data.data && data.data.answer ? data.data.answer : "Sorry, due to restrictions, please try again later.";
+				chatDiv.removeChild(thinkingMessage);
+				const aiMessageDiv = document.createElement('div');
+				aiMessageDiv.className = 'msg ai';
+				chatDiv.appendChild(aiMessageDiv);
+				window.scrollTo(0, document.body.scrollHeight);
+				let currentText = "";
+				let index = 0;
+				const typingEffect = setInterval(() => {
+					if (index < aiFullMarkdown.length) {
+						currentText += aiFullMarkdown.charAt(index);
+						aiMessageDiv.innerHTML = `<div class="tip">AI-generated content is for reference only.</div>` + marked.parse(currentText);
+						window.scrollTo(0, document.body.scrollHeight);
+						index++;
+					} else {
+						clearInterval(typingEffect);
+					}
+				}, 10);
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				chatDiv.removeChild(thinkingMessage);
+				chatDiv.innerHTML += `<div class="msg ai">
+				<div class="tip">AI-generated content is for reference only.</div>
+				An error occurred, please try again later.
+				</div>`;
+				window.scrollTo(0, document.body.scrollHeight);
+			});
+	};
+	document.getElementById("input").addEventListener("keydown", function(e){
+		if(e.key === "Enter" && !e.shiftKey){
+			e.preventDefault();
+			document.getElementById("send").click();
+		}
+	})
+</script>
+</body>
+</html>
